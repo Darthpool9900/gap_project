@@ -1,3 +1,48 @@
+# Documentação Técnica: Cliente e Servidor de Tradução com Controle Descentralizado para Blockchain
+
+## Visão Geral
+
+Este sistema implementa uma solução de tradução de texto utilizando modelos de linguagem, projetada para funcionar com **controle descentralizado** e integrada a uma blockchain. O serviço é acessado por meio de rotas registradas na cadeia, e somente o proprietário autorizado pode executar ou controlar o serviço.
+
+Há dois componentes principais:
+
+- **Script CLI local** — executado no computador do usuário, normalmente um nó da blockchain, para garantir controle individual e descentralizado.
+- **Servidor FastAPI dedicado** — um serviço HTTP que pode ser hospedado em um servidor externo, mas o controle e a autorização permanecem descentralizados via blockchain.
+
+---
+
+## Controle Descentralizado via Blockchain
+
+- **Registro de rota na blockchain:** O endpoint da API é registrado na cadeia, garantindo que a invocação do serviço seja autorizada e auditável.
+- **Propriedade exclusiva:** Somente o proprietário da cadeia (ou usuário autorizado via blockchain) pode controlar o acesso ao serviço, mantendo o poder de decisão descentralizado.
+
+- **Segurança e imutabilidade:** O blockchain garante que alterações não autorizadas na rota ou no controle de serviço sejam facilmente detectadas.
+
+---
+
+## Design de Componentes
+
+| Aspecto | Script CLI (Execução Local) | Servidor FastAPI (Servidor Dedicado) |
+|--------------------------|--------------------------------------------|------------------------------------------------|
+| Execução | Local na máquina do usuário (nó) | Serviço HTTP hospedado remotamente |
+| Entrada | Argumento de linha de comando (`sys.argv`) | JSON via HTTP POST |
+| Comunicação do Modelo | Chamada HTTP para endpoint registrado na cadeia | Chamada HTTP para o mesmo endpoint via API REST |
+| Controle de Serviço | Controlado por execução local autorizada pela cadeia | Controlado por blockchain com acesso descentralizado |
+| Automação e Determinismo | Totalmente automatizado, não interativo, reproduzível | Totalmente automatizado, acessível remotamente com autorização da cadeia |
+
+---
+
+## Fluxo de Trabalho Geral
+
+1. A rota do serviço de tradução é registrada na blockchain, vinculada a um proprietário.
+2. O proprietário da cadeia configura qual serviço está ativo e pode ser chamado.
+3. O script CLI local ou o servidor FastAPI realiza a tradução conforme autorizado pela blockchain.
+4. Os prompts e formatos de solicitação são padronizados para garantir auditabilidade e previsibilidade.
+5. Os resultados são usados em transações ou contratos inteligentes, garantindo a confiabilidade do sistema.
+
+---
+
+---
 # Technical Documentation: Translation Client and Server with Decentralized Control for Blockchain
 
 ## Overview
