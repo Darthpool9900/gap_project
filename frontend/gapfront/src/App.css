@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme{
+  --color-BlueWhale:#2029D7;
+  --color-Snow:#FBFBFB;
+  --color-SubGray:#AEAEAE;
+  --color-MainText:#1B1818;
+}
+
+html, body, #root {
+  padding:0;
+  margin:0;
+}
+
+.shadow_ef {
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.25));
+}
+
