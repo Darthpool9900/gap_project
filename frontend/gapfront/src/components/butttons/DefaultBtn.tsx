@@ -1,11 +1,12 @@
 interface DefautlBtnInterface{
     value:string
     onPress?:React.MouseEventHandler
+    disabled?:boolean
 }
 
-export default function DefaultBtn({value,onPress}:DefautlBtnInterface){
+export default function DefaultBtn({value,onPress,disabled}:DefautlBtnInterface){
     return(
-        <button className="
+        <button className={`
         w-full 
         h-auto 
         p-2.5 
@@ -13,10 +14,10 @@ export default function DefaultBtn({value,onPress}:DefautlBtnInterface){
         bg-BlueWhale rounded-lg 
         drop-shadow-MainText shadow-2xl 
         text-Snow transition-colors
-        cursor-pointer
-        hover:bg-blue-700
-        "
+        ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-blue-700'}
+        `}
         onClick={onPress}
+        disabled={disabled}
         >{value}</button>
     )
 }

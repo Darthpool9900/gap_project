@@ -1,5 +1,5 @@
 import { UserCircle } from "phosphor-react";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function ProfileCard() {
   const [username, setUsername] = useState<string>("");

@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import GeneralCards from "../../components/cards/UserAiCards"; // ou o caminho correto do GeneralCards
 import { getAllAgents } from "../../services/chain/service";
 
 export default function HomePage() {
   const [agents, setAgents] = useState<any[]>([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAgents = async () => {
@@ -13,8 +11,8 @@ export default function HomePage() {
         const response = await getAllAgents();
         let allAgents: any[] = [];
 
-        if (response?.data && Array.isArray(response.data)) {
-          allAgents = response.data;
+        if (response && typeof response === 'object' && 'data' in response && Array.isArray((response as any).data)) {
+          allAgents = (response as any).data;
         } else if (Array.isArray(response)) {
           allAgents = response;
         } else {

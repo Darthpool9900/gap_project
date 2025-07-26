@@ -156,7 +156,7 @@ function App() {
     }
 
     try {
-      const parsedData = JSON.parse(fileData);
+      JSON.parse(fileData); // Validate JSON format
       localStorage.setItem("userData", fileData); // Salva no cache
       setMessage("Login successful!");
       navigate("home");

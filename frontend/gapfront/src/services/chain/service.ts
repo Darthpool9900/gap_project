@@ -1,9 +1,8 @@
-import { IDL } from '@dfinity/candid';
 import { Actor, HttpAgent } from '@dfinity/agent';
 
 const CANISTER_ID = 'uxrrr-q7777-77774-qaaaq-cai';
 
-const idlFactory = ({ IDL }) => {
+const idlFactory = ({ IDL }: { IDL: any }) => {
   return IDL.Service({
     create_agent: IDL.Func([
       IDL.Record({
@@ -210,16 +209,16 @@ const actor = Actor.createActor(idlFactory, {
   canisterId: CANISTER_ID,
 });
 
-export const createAgent = async (payload) => await actor.create_agent(payload);
-export const buyAgent = async (payload) => await actor.buy_agent(payload);
-export const getAgent = async (agentId) => await actor.get_agent(agentId);
+export const createAgent = async (payload: any) => await actor.create_agent(payload);
+export const buyAgent = async (payload: any) => await actor.buy_agent(payload);
+export const getAgent = async (agentId: any) => await actor.get_agent(agentId);
 export const getAllAgents = async () => await actor.get_all_agents();
-export const getAgentsByCategory = async (category) => await actor.get_agents_by_category(category);
-export const getUserAgents = async (userId) => await actor.get_user_agents(userId);
-export const getAgentListing = async (agentId) => await actor.get_agent_listing(agentId);
+export const getAgentsByCategory = async (category: any) => await actor.get_agents_by_category(category);
+export const getUserAgents = async (userId: any) => await actor.get_user_agents(userId);
+export const getAgentListing = async (agentId: any) => await actor.get_agent_listing(agentId);
 export const getActiveListings = async () => await actor.get_active_listings();
-export const getUserPurchases = async (userId) => await actor.get_user_purchases(userId);
-export const updateAgent = async (agentId, payload) => await actor.update_agent(agentId, payload);
-export const toggleAgentListing = async (agentId) => await actor.toggle_agent_listing(agentId);
+export const getUserPurchases = async (userId: any) => await actor.get_user_purchases(userId);
+export const updateAgent = async (agentId: any, payload: any) => await actor.update_agent(agentId, payload);
+export const toggleAgentListing = async (agentId: any) => await actor.toggle_agent_listing(agentId);
 export const getMarketplaceStats = async () => await actor.marketplace_stats();
-export const registerUser = async (payload) => await actor.register_user(payload);
+export const registerUser = async (payload: any) => await actor.register_user(payload);

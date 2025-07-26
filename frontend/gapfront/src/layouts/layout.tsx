@@ -1,5 +1,4 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 import { Link } from "react-router-dom";
 import ProfileCard from "../components/cards/ProfileCard";
 

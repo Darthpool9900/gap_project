@@ -36,8 +36,8 @@ export default function AgentsPage() {
 
       const response = await getUserAgents(userId);
 
-      if (response?.status === "success" && Array.isArray(response.data)) {
-        setAgents(response.data);
+      if (response && typeof response === 'object' && 'status' in response && response.status === "success" && 'data' in response && Array.isArray((response as any).data)) {
+        setAgents((response as any).data);
       } else if (Array.isArray(response)) {
         setAgents(response);
       } else {

@@ -19,8 +19,8 @@ export default function ChatsPage() {
 
         if (Array.isArray(response)) {
           setAgents(response);
-        } else if (response?.status === "success" && Array.isArray(response.data)) {
-          setAgents(response.data);
+        } else if (response && typeof response === 'object' && 'status' in response && response.status === "success" && 'data' in response && Array.isArray((response as any).data)) {
+          setAgents((response as any).data);
         } else {
           console.warn("Resposta inesperada em getAllAgents:", response);
         }
