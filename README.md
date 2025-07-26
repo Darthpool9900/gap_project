@@ -58,9 +58,21 @@ thread_local! {
 
 > _Add interface screenshots here:_
 - Homepage UI
+  
+     <img width="589" height="361" alt="image" src="https://github.com/user-attachments/assets/3b2b522f-6362-40a0-8cb7-4fc5833db3e8" />
+
 - Agent upload modal
-- Blockchain debug console
-- Tauri execution log
+
+  <img width="694" height="382" alt="image" src="https://github.com/user-attachments/assets/705b6692-0fd7-4913-b154-f9b4ba6c4282" />
+
+- Agent chat
+
+  <img width="738" height="381" alt="image" src="https://github.com/user-attachments/assets/c2dce2d7-9ba0-4060-a223-3398fa7248bd" />
+
+- MarketPlace
+
+  <img width="694" height="382" alt="image" src="https://github.com/user-attachments/assets/6f427091-c8a5-4f0f-a2c9-01550a2c0d7e" />
+
 
 ---
 
