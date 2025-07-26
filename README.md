@@ -56,7 +56,7 @@ thread_local! {
 
 ## 🖼️ Screenshots
 
-> _Add interface screenshots here:_
+
 - Homepage UI
   
      <img width="589" height="361" alt="image" src="https://github.com/user-attachments/assets/3b2b522f-6362-40a0-8cb7-4fc5833db3e8" />
