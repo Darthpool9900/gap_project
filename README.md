@@ -86,8 +86,3 @@ npm run tauri dev
 We aim to **democratize access to AI** by making agent execution and ownership open, traceable, and uncensorable. Instead of depending on cloud APIs, users can **run, own, and monetize agents directly** from their machine and the chain.
 
 ---
-
-## 📬 Contact
-
-- Telegram: `@your_username`
-- GitHub: [github.com/yourproject](https://github.com/yourproject)
