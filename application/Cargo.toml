@@ -1,5 +1,6 @@
 [workspace]
 members = [
-    "src/backend"
+    "src/backend",
+    "src/desktop/src-tauri"
 ]
 resolver = "2"

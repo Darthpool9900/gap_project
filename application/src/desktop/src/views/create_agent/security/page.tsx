@@ -1,68 +1,81 @@
-import { FloppyDiskBack } from "phosphor-react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DefaultBtn from "../../../components/butttons/DefaultBtn";
-import { useRef } from "react";
+import { TextInput, PrimaryButton, SecondaryButton } from "../../../components/ui";
 
-export default function InjectPhase() {
+export default function SecurityPage() {
   const navigate = useNavigate();
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [securityKey, setSecurityKey] = useState("");
+  const [confirmKey, setConfirmKey] = useState("");
 
-  const reqCreate = (path: string) => {
-    navigate(path);
-  };
-
-  const SendFile = (file: File) => {
-    console.log("Save hash to file:", file.name);
-    // aqui você pode gerar o conteúdo .txt e salvar ou manipular conforme necessário
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      SendFile(file);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (securityKey !== confirmKey) {
+      alert("As chaves de segurança não coincidem!");
+      return;
     }
+    // Lógica para finalizar a criação do agente
+    console.log("Agente criado com sucesso!");
+    navigate("/agents_user");
+  };
+
+  const handleBack = () => {
+    navigate("/create_agent/add_image");
   };
 
   return (
-    <section className="w-full h-full flex flex-col justify-center items-center">
-      <div className="w-5/6 h-auto flex flex-col justify-center items-center gap-6">
-        <h1 className="text-5xl text-MainText font-bold text-left w-4/6">
-          More security
-        </h1>
-        <p className="text-2xl text-SubGray w-4/6 text-justify">
-          This is a blockchain hub remember? So store your key in somewhere
-          where can be in security is always good. Don’t worry you always can
-          see your key here in individual agent if want but we recommend save
-          in another place.
-        </p>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 p-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Configurações de Segurança</h1>
+          <p className="text-xl text-gray-600">Configure as chaves de segurança para o seu agente</p>
+        </div>
 
-      <div className="w-full h-3/6 flex flex-col justify-center items-center gap-2">
-        <FloppyDiskBack size={250} color="#2029D7" />
-        <div className="w-1/4 flex flex-col gap-4">
-          <label
-            htmlFor="saveFile"
-            className="cursor-pointer"
-          >
-            <DefaultBtn value="Send file" onPress={() => fileInputRef.current?.click()} />
-          </label>
+        <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <TextInput
+                value={securityKey}
+                onChange={(e) => setSecurityKey(e.target.value)}
+                placeholder="Chave de segurança"
+                label="Chave de Segurança"
+                type="password"
+                required
+              />
+            </div>
 
-          <input
-            id="saveFile"
-            ref={fileInputRef}
-            type="file"
-            className="hidden"
-            onChange={handleFileChange}
-          />
+            <div>
+              <TextInput
+                value={confirmKey}
+                onChange={(e) => setConfirmKey(e.target.value)}
+                placeholder="Confirme a chave de segurança"
+                label="Confirmar Chave"
+                type="password"
+                required
+                error={securityKey && confirmKey && securityKey !== confirmKey}
+                errorMessage="As chaves não coincidem"
+              />
+            </div>
 
-          <DefaultBtn
-            value="Skip"
-            onPress={() => {
-              reqCreate("/agents_user");
-            }}
-          />
+            <div className="pt-6 flex gap-4">
+              <SecondaryButton
+                type="button"
+                onClick={handleBack}
+                className="flex-1"
+              >
+                Voltar
+              </SecondaryButton>
+              
+              <PrimaryButton
+                type="submit"
+                className="flex-1"
+                disabled={!securityKey || !confirmKey || securityKey !== confirmKey}
+              >
+                Finalizar Criação
+              </PrimaryButton>
+            </div>
+          </form>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

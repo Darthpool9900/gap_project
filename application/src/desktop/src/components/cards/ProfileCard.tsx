@@ -1,8 +1,9 @@
-import { UserCircle } from "phosphor-react";
 import { useState, useEffect } from "react";
+import { ProfileCard as NewProfileCard } from "../ui";
 
 export default function ProfileCard() {
   const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
 
   useEffect(() => {
     const userData = localStorage.getItem("userData");
@@ -10,23 +11,19 @@ export default function ProfileCard() {
       try {
         const parsed = JSON.parse(userData);
         setUsername(parsed.username || "");
+        setEmail(parsed.email || "");
       } catch {
         setUsername("");
+        setEmail("");
       }
     }
   }, []);
 
   return (
-    <div className="w-5/6 h-24 bg-Snow drop-shadow-black gap-4 shadow-2xl flex justify-start items-center p-4 rounded-lg">
-      <div className="size-16 rounded-full  flex justify-center items-center">
-        {/*Aqui será o profile image do user*/}
-        <UserCircle size={64} color="black"/>
-      </div>
-      <div className="w-1/6 xl:w-4/6 h-auto flex justify-start">
-        <span className="text-MainText text-lg xl:text-xl">
-          {username || "Usuário"}
-        </span>
-      </div>
-    </div>
+    <NewProfileCard
+      name={username || "Usuário"}
+      email={email || "usuario@email.com"}
+      role="Membro"
+    />
   );
 }

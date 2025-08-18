@@ -1,74 +1,86 @@
-import { useNavigate } from "react-router-dom";
-import DefaultBtn from "../../../components/butttons/DefaultBtn";
-import { Plus } from "phosphor-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { PrimaryButton, SecondaryButton } from "../../../components/ui";
 
 export default function AddImagePage() {
   const navigate = useNavigate();
-  const [preview, setPreview] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
-  const reqCreate = (path: string) => {
-    navigate(path);
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedImage(e.target.files[0]);
     }
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Lógica para processar a imagem
+    console.log("Imagem selecionada:", selectedImage);
+    navigate("/create_agent/security");
+  };
+
+  const handleBack = () => {
+    navigate("/create_agent/new_agent");
+  };
+
   return (
-    <section className="w-full h-full flex justify-center flex-col items-center">
-      <div className="w-3/5 h-auto flex justify-center flex-col items-start p-8 gap-8">
-        <div className="w-full h-auto flex justify-start">
-          <h1 className="text-4xl text-MainText font-bold">
-            Let’s start with a few infos
-          </h1>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 p-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Adicionar Imagem</h1>
+          <p className="text-xl text-gray-600">Selecione uma imagem para o seu agente (opcional)</p>
         </div>
-        <span className="text-2xl text-SubGray w-4/5">
-          Just for use your computer as server, we need just a few infors about
-          the agent.
-        </span>
+
+        <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="text-center">
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 hover:border-blue-400 transition-colors">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="hidden"
+                  id="image-upload"
+                />
+                <label htmlFor="image-upload" className="cursor-pointer">
+                  <div className="space-y-4">
+                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
+                      <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-lg font-medium text-gray-900">
+                        {selectedImage ? selectedImage.name : "Clique para selecionar uma imagem"}
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        {selectedImage ? "Imagem selecionada" : "PNG, JPG até 10MB"}
+                      </p>
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div className="pt-6 flex gap-4">
+              <SecondaryButton
+                type="button"
+                onClick={handleBack}
+                className="flex-1"
+              >
+                Voltar
+              </SecondaryButton>
+              
+              <PrimaryButton
+                type="submit"
+                className="flex-1"
+              >
+                Próximo
+              </PrimaryButton>
+            </div>
+          </form>
+        </div>
       </div>
-
-      <form className="w-4/6 h-auto flex justify-center items-center flex-col">
-        <label
-          htmlFor="fileInput"
-          className="size-74 bg-Snow drop-shadow-2xl shadow-MainText rounded-full flex justify-center items-center overflow-hidden cursor-pointer"
-        >
-          {preview ? (
-            <img
-              src={preview}
-              alt="preview"
-              className="object-cover w-full h-full"
-            />
-          ) : (
-            <Plus size={180} color="#333" />
-          )}
-        </label>
-
-        <input
-          id="fileInput"
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          className="hidden"
-        />
-
-        <div className="w-1/3 h-auto mt-8">
-          <DefaultBtn
-            onPress={() => {
-              reqCreate("/create_agent/security");
-            }}
-            value="Next phase"
-          />
-        </div>
-      </form>
-    </section>
+    </div>
   );
 }

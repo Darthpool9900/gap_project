@@ -11,24 +11,28 @@ import NewAgentAdd from "./views/create_agent/new_agent/page";
 import AddImagePage from "./views/create_agent/add_image/page";
 import InjectPhase from "./views/create_agent/security/page";
 import ChatAgentPage from "./views/chat/page";
+import { NotificationProvider } from "./contexts/NotificationContext";
+import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <HashRouter>
-      <Routes>
-        <Route index element={<App />} />
-        <Route element={<Layout/>}>
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/agents_user" element={<AgentsPage/>} />
-        <Route path="/user_chats" element={<ChatsPage />} />
-        <Route path="/create_agent" element={<AddHostPage />} />
-        <Route path="/create_agent/new_agent" element={<NewAgentAdd />} />
-        <Route path="/create_agent/add_image" element={<AddImagePage />} />
-        <Route path="/create_agent/security" element={<InjectPhase />} />
-        <Route path="/agent_page" element={<HomePage />} />
-        <Route path="/chat/:code" element={<ChatAgentPage />} />
-        </Route>
-      </Routes>
-    </HashRouter>
+    <NotificationProvider>
+      <HashRouter>
+        <Routes>
+          <Route index element={<App />} />
+          <Route element={<Layout/>}>
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/agents_user" element={<AgentsPage/>} />
+          <Route path="/user_chats" element={<ChatsPage />} />
+          <Route path="/create_agent" element={<AddHostPage />} />
+          <Route path="/create_agent/new_agent" element={<NewAgentAdd />} />
+          <Route path="/create_agent/add_image" element={<AddImagePage />} />
+          <Route path="/create_agent/security" element={<InjectPhase />} />
+          <Route path="/agent_page" element={<HomePage />} />
+          <Route path="/chat/:code" element={<ChatAgentPage />} />
+          </Route>
+        </Routes>
+      </HashRouter>
+    </NotificationProvider>
   </React.StrictMode>,
 );
